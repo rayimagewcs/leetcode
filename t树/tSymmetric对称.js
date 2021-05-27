@@ -2,6 +2,10 @@ const TreeNode = require("./tree");
 const { create } = require("./treeUtil");
 
 /**
+ * 
+ * @link https://leetcode-cn.com/tag/tree/problemset/
+ * 对称二叉树
+ * 
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
  *     this.val = (val===undefined ? 0 : val)
