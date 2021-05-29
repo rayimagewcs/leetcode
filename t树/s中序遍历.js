@@ -1,6 +1,5 @@
-const TreeNode = require('./tree')
-
-console.log(TreeNode)
+const TreeNode = require('./tree');
+const { create } = require('./treeUtil');
 
 /**
  * Definition for a binary tree node.
@@ -40,3 +39,24 @@ var inorderTraversal = function(root) {
     sear(root)
     return res
 };
+
+inorderTraversal = function(root) {
+    let res = []
+    let q = []
+    let cur = root
+    while (cur || q.length) {
+        while (cur) {
+            q.push(cur)
+            cur = cur.left
+        }
+        cur = q.pop()
+        res.push(cur.val)
+        cur = cur.right
+    }
+
+    return res
+}
+
+root = create([3,1,4,null,2])
+res = inorderTraversal(root)
+console.log(res)
