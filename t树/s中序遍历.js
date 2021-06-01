@@ -40,6 +40,9 @@ var inorderTraversal = function(root) {
     return res
 };
 
+/**
+ * 中序遍历非递归实现
+ */
 inorderTraversal = function(root) {
     let res = []
     let q = []
@@ -59,4 +62,66 @@ inorderTraversal = function(root) {
 
 root = create([3,1,4,null,2])
 res = inorderTraversal(root)
+console.log(res)
+
+/**
+ * 前序遍历非递归实现
+ * @param {*} root 
+ * @returns 
+ */
+function preorderTraversal(root) {
+    let cur = root
+    let q = [], res = []
+    while (cur || q.length) {
+        while (cur) {
+            res.push(cur.val)
+            q.push(cur)
+            cur = cur.left
+        }
+        cur = q.pop()
+        cur = cur.right
+    }
+    return res
+}
+
+root = create([3,1,4,null,2])
+res = preorderTraversal(root)
+console.log(res)
+
+/**
+ * 后序遍历非递归实现
+ * @param {*} root 
+ */
+function postorderTraversal(root) {
+    let cur = root
+    let q = [], res = [], prev = null
+    while (cur || q.length) {
+        while (cur) {
+            q.push(cur)
+            cur = cur.left
+        }
+
+        cur = q.pop()
+        while (cur) {
+            // 判断prev !== cur.right 是因为如果3是2的右子节点，当前pop出2时，2的right为3，这样会进入死循环
+            if (cur.right && cur.right !== prev) {
+                q.push(cur)
+                cur = cur.right
+                break
+            }
+            res.push(cur.val)
+            prev = cur
+            cur = q.pop()
+        }
+    }
+
+    return res
+}
+
+root = create([3,1,4,null,2])
+res = postorderTraversal(root)
+console.log(res)
+
+root = create([3,9,4,null,null,5,7,null,null,2,1])
+res = postorderTraversal(root)
 console.log(res)
